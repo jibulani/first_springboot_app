@@ -1,5 +1,6 @@
 package com.qiwi.springboot;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class AgentController {
 
-    private final AgentService agentService = new AgentService();
+    private final AgentService agentService;
+
+    @Autowired
+    public AgentController(AgentService agentService) {
+        this.agentService = agentService;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> home() {

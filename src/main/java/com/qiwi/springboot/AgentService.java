@@ -12,6 +12,7 @@ import com.qiwi.springboot.AgentRepository;
  * Created by etrofimov on 18.07.17.
  */
 
+@Component
 public class AgentService {
 
     @Autowired // This means to get the bean called userRepository
@@ -52,7 +53,7 @@ public class AgentService {
 
         Agent agent = new Agent();
         agent.setTelephone(agentRequest.getLogin());
-        agent.setPwd(agentRequest.getPassword());
+        agent.setPwd(HashCodeGenerator.getHashCode(agentRequest.getPassword()));
         agentRepository.save(agent);
         return Status.OK;
 
