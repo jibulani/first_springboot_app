@@ -15,5 +15,7 @@ public interface AgentBalanceRepository extends JpaRepository<AgentBalance, Stri
     @Query(value = "SELECT balance FROM user_balance WHERE telephone = ?", nativeQuery = true)
     BigDecimal getBalance(String telephone);
 
+    AgentBalance findByTelephone(String telephone);
+
 
 }

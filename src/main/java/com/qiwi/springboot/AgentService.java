@@ -92,7 +92,7 @@ public class AgentService {
 
         if (countAgent == 0) return new Response(Status.NOT_EXISTS);
 
-        BigDecimal balance = agentBalanceRepository.getBalance(agentRequest.getLogin());
+        BigDecimal balance = agentBalanceRepository.findByTelephone(agentRequest.getLogin()).getBalance(); //agentBalanceRepository.getBalance(agentRequest.getLogin());
 
         return new Response(Status.OK, balance);
 
