@@ -1,6 +1,8 @@
 package com.qiwi.springboot;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -86,20 +88,13 @@ public class AgentService {
             return new Response(Status.BAD_PASSWORD);
         }
 
-        int countAgent = jdbcTemplate.queryForObject(
-                "SELECT count(*) FROM users WHERE telephone = ? AND pwd = ?", Integer.class,
-                agentRequest.getLogin(), HashCodeGenerator.getHashCode(agentRequest.getPassword())
-        );
+        int countAgent = agentRepository.getAgentCount(agentRequest.getLogin(), HashCodeGenerator.getHashCode(agentRequest.getPassword()));
 
         if (countAgent == 0) return new Response(Status.NOT_EXISTS);
 
-        BigDecimal balance = jdbcTemplate.queryForObject(
-                "SELECT balance FROM user_balance WHERE telephone = ?", BigDecimal.class,
-                agentRequest.getLogin()
-        );
+        BigDecimal balance = agentBalanceRepository.getBalance(agentRequest.getLogin());
 
         return new Response(Status.OK, balance);
 
-//        return ClientDaoSingleton.getInstance().getUserBalance(agentRequest);
     }
 }
