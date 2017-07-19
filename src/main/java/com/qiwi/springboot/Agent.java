@@ -17,6 +17,11 @@ public class Agent {
 
     private String pwd;
 
+//    public Agent(String telephone, String pwd) {
+//        this.telephone = telephone;
+//        this.pwd = pwd;
+//    }
+
     public String getTelephone() {
         return this.telephone;
     }
