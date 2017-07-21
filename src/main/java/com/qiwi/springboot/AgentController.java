@@ -34,33 +34,44 @@ public class AgentController {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes={"application/json", "application/xml"})
-    @ResponseBody
-    public BalanceResponse addUser(@RequestBody AgentRequest agentRequest) {
+    @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_XML_VALUE}, consumes={"application/xml"})
+    public @ResponseBody BalanceResponse addUserXml(@RequestBody AgentRequest agentRequest) {
         log.info(agentRequest.getRequestType() + " POST-request with login=" + agentRequest.getLogin() + " and password=" + agentRequest.getPassword());
-//        String respMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><response><result-code>";
-//        int resultCode;
-
         if (agentRequest.getRequestType().equals("new-agt")) {
-//            resultCode = this.agentService.registerNewAgent(agentRequest).getStatusCode();
             Status status = this.agentService.registerNewAgent(agentRequest);
-//            respMsg += resultCode + "</result-code></response>";
             log.info("Returned response with result-code=" + status.getStatusCode());
             return new BalanceResponse(status);
         }
 
         else if (agentRequest.getRequestType().equals("agt-bal")) {
             BalanceResponse balanceResponse = this.agentService.getBalance(agentRequest);
-//            respMsg += balanceResponse.getCode().getStatusCode() + "</result-code><bal>" + balanceResponse.getBalance() + "</bal></balanceResponse>";
             log.info("Returned balanceResponse with result-code=" + balanceResponse.getCode());
             return balanceResponse;
         }
         else {
-//            respMsg += "5</result-code></response>";
             log.info("Returned response with result-code=5");
             return new BalanceResponse(Status.OTHER);
         }
-//        return new ResponseEntity<String>(respMsg, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE},  consumes={"application/json"})
+    public @ResponseBody BalanceResponse addUserJson(@RequestBody AgentRequest agentRequest) {
+        log.info(agentRequest.getRequestType() + " POST-request with login=" + agentRequest.getLogin() + " and password=" + agentRequest.getPassword());
+        if (agentRequest.getRequestType().equals("new-agt")) {
+            Status status = this.agentService.registerNewAgent(agentRequest);
+            log.info("Returned response with result-code=" + status.getStatusCode());
+            return new BalanceResponse(status);
+        }
+
+        else if (agentRequest.getRequestType().equals("agt-bal")) {
+            BalanceResponse balanceResponse = this.agentService.getBalance(agentRequest);
+            log.info("Returned balanceResponse with result-code=" + balanceResponse.getCode());
+            return balanceResponse;
+        }
+        else {
+            log.info("Returned response with result-code=5");
+            return new BalanceResponse(Status.OTHER);
+        }
     }
 
 }

@@ -1,5 +1,7 @@
 package com.qiwi.springboot;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -12,8 +14,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = {"requestType", "login", "password"})
 public class AgentRequest {
 
+    @JsonProperty("request-type")
     private String requestType;
+    @JsonProperty("login")
     private String login;
+    @JsonProperty("password")
     private String password;
 
     String getLogin() { return this.login; }
