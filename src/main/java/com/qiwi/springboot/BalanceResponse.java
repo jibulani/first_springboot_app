@@ -1,5 +1,7 @@
 package com.qiwi.springboot;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -14,9 +16,9 @@ import java.math.RoundingMode;
 public class BalanceResponse {
 //    private Status code;
 
-
+    @JsonProperty("code")
     private int code;
-
+    @JsonProperty("balance")
     private BigDecimal balance;
 
     public BalanceResponse() {
@@ -25,9 +27,9 @@ public class BalanceResponse {
 
     public BalanceResponse(Status code) {
         this.code = code.getStatusCode();
-//        this.balance = null;
+        this.balance = null;
 
-        this.balance = new BigDecimal(0);
+//        this.balance = new BigDecimal(0);
     }
 
     public BalanceResponse(Status code, BigDecimal balance) {

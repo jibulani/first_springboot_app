@@ -1,5 +1,6 @@
 package com.qiwi.springboot;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 /**
  * Created by etrofimov on 18.07.17.
  */
+
 
 @RestController
 @RequestMapping("/")
