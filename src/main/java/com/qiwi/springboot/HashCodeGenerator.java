@@ -1,11 +1,17 @@
 package com.qiwi.springboot;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.security.MessageDigest;
 
 /**
  * Created by etrofimov on 18.07.17.
  */
 public class HashCodeGenerator {
+
+    private static final Logger log = LoggerFactory.getLogger(AgentController.class);
+
     public static String getHashCode(String password) {
         String generatedPassword = null;
         try {
@@ -18,7 +24,8 @@ public class HashCodeGenerator {
             generatedPassword = sb.toString();
         }
         catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            log.error("error occured", e);
         }
         return generatedPassword;
     }

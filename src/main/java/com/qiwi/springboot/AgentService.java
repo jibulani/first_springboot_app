@@ -1,15 +1,8 @@
 package com.qiwi.springboot;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import com.qiwi.springboot.Agent;
-import com.qiwi.springboot.AgentRepository;
 
 import java.math.BigDecimal;
 
@@ -77,24 +70,24 @@ public class AgentService {
 
     }
 
-    Response getBalance(AgentRequest agentRequest) {
+    BalanceResponse getBalance(AgentRequest agentRequest) {
         String login = agentRequest.getLogin();
         if (!isLoginExists(login) || !isRightLogin(login)) {
-            return new Response(Status.WRONG_FORMAT);
+            return new BalanceResponse(Status.WRONG_FORMAT, BigDecimal.ZERO);
         }
 
         String password = agentRequest.getPassword();
         if (!isPasswordExists(password)) {
-            return new Response(Status.BAD_PASSWORD);
+            return new BalanceResponse(Status.BAD_PASSWORD, BigDecimal.ZERO);
         }
 
         int countAgent = agentRepository.getAgentCount(agentRequest.getLogin(), HashCodeGenerator.getHashCode(agentRequest.getPassword()));
 
-        if (countAgent == 0) return new Response(Status.NOT_EXISTS);
+        if (countAgent == 0) return new BalanceResponse(Status.NOT_EXISTS, BigDecimal.ZERO);
 
         BigDecimal balance = agentBalanceRepository.findByTelephone(agentRequest.getLogin()).getBalance(); //agentBalanceRepository.getBalance(agentRequest.getLogin());
 
-        return new Response(Status.OK, balance);
+        return new BalanceResponse(Status.OK, balance);
 
     }
 }
