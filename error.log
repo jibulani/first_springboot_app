@@ -1,0 +1,2 @@
+2017-07-24 12:58:55 [http-nio-8080-exec-1] ERROR c.qiwi.springboot.HashCodeGenerator - test
+2017-07-24 12:58:58 [http-nio-8080-exec-2] ERROR c.qiwi.springboot.HashCodeGenerator - test

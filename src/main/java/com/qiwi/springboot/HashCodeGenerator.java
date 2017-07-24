@@ -10,7 +10,7 @@ import java.security.MessageDigest;
  */
 public class HashCodeGenerator {
 
-    private static final Logger log = LoggerFactory.getLogger(AgentController.class);
+    private static final Logger log = LoggerFactory.getLogger(HashCodeGenerator.class);
 
     public static String getHashCode(String password) {
         String generatedPassword = null;
@@ -22,6 +22,7 @@ public class HashCodeGenerator {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             generatedPassword = sb.toString();
+            log.error("test");
         }
         catch (Exception e) {
 //            e.printStackTrace();

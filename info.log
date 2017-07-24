@@ -1,0 +1,4 @@
+2017-07-24 12:58:55 [http-nio-8080-exec-1] INFO com.qiwi.springboot.AgentController - new-agt POST-request with login=0000000022 and password=superpass
+2017-07-24 12:58:55 [http-nio-8080-exec-1] INFO com.qiwi.springboot.AgentController - Returned response with result-code=1
+2017-07-24 12:58:58 [http-nio-8080-exec-2] INFO com.qiwi.springboot.AgentController - agt-bal POST-request with login=0000000022 and password=superpass
+2017-07-24 12:58:58 [http-nio-8080-exec-2] INFO com.qiwi.springboot.AgentController - Returned balanceResponse with result-code=0
